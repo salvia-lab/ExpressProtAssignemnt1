@@ -1,3 +1,5 @@
+<!--Salvia Rahman; Student ID; 301114183-->
+
 <!--includeing header section from the header.ejs-->
 <%- include partials/header.ejs %>
 <!--includeing main naviation section from the main_nav.ejs-->
@@ -8,9 +10,28 @@
     <div class="jumbotron">
       <h1 class="display-4">Welcome to the <%= title %> Page</h1>
       <!--includeing about information from the about_ingo.ejs-->
-      <%- include partials/about_info.ejs %>
+      <div align="center"><!--Div to make the content centre-->
+<h2 class="display-4"><b>Salvia Rahman</b></h2>
+<img src="/Assests/images/myself.jpg" style="max-width:50%;" alt="myself" class="img-thumbnail">  <!--image location-->
+    <p>
+        <h3><span class="glyphicon glyphicon-education"></span>Education:</h3>
+    </p>
+    <p>
+        <h5>Advanced Deploma</h5>
+          <h5> Software Engineering Technology</h5>
+        <h5>Centennial College, Scarbrough, Canada</h5>     
+    </p>
+     <a href="https://github.com/salvia-lab/resume-Salvia-Rahman-/blob/main/Salvia%20Rahman.pdf"> <!--git location for resume-->
+            <h3><span class="glyphicon glyphicon-download"></span>Download Resume</h3>           
+        </a>
+    
+
+       
     </div>
-  </main>
+</div>
+    
+</div>
+</main>
   
 <!--includeing bottom naviation section from the bottom_nav.ejs-->
 <%- include partials/bottom_nav.ejs %>

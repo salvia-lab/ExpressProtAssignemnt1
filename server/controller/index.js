@@ -1,11 +1,12 @@
+//Salvia Rahman; Student ID; 301114183
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
 
 // enable jwt
-//let jwt = require('jsonwebtoken');
-//let DB = require('../config/db');
+let jwt = require('jsonwebtoken');
+let DB = require('../config/db');
 
 // create the User Model instance
 let userModel = require('../models/user');
@@ -30,24 +31,24 @@ module.exports.displayServicesPage = (req, res, next) => {
 module.exports.displayContactPage = (req, res, next) => {
     res.render('contact', { title: 'Contact', displayName: req.user ? req.user.displayName : ''});
 }
-
+//Display login Page
 module.exports.displayLoginPage = (req, res, next) => {
     // check if the user is already logged in
-        if(!req.user)
+    if(!req.user)
+    {
+        res.render('auth/login', 
         {
-            res.render('auth/login', 
-            {
-                title: "Login",
-                messages: req.flash('loginMessage'),
-                displayName: req.user ? req.user.displayName : '' 
-                })
-            }
-            else
-            {
-                return res.redirect('/');
-            }
-        }
-
+            title: "Login",
+            messages: req.flash('loginMessage'),
+            displayName: req.user ? req.user.displayName : '' 
+        })
+    }
+    else
+    {
+        return res.redirect('/');
+    }
+}
+    
 module.exports.processLoginPage = (req, res, next) => {
     passport.authenticate('local',
     (err, user, info) => {
@@ -68,38 +69,30 @@ module.exports.processLoginPage = (req, res, next) => {
         {
             return next(err);
         }
-        return res.redirect('/contact-list');
-    });
-    
-  })(req, res, next);
-}
-/*
         const payload = 
         {
             id: user._id,
             displayName: user.displayName,
             username: user.username,
             email: user.email
-         }
-
-                    const authToken = jwt.sign(payload, DB.Secret, {
-                        expiresIn: 604800 // 1 week
-                    });
-
-                    /* TODO - Getting Ready to convert to API
-                    res.json({success: true, msg: 'User Logged in Successfully!', user: {
-                        id: user._id,
-                        displayName: user.displayName,
-                        username: user.username,
-                        email: user.email
-                    }, token: authToken});
-                    */
-/*
-                    return res.redirect('/contact-list');
-                });
-            })(req, res, next);
         }
-*/
+        const authToken=jwt.sign(payload, DB.Secret, {
+            expiresIn: 604800 // 1 week
+        });
+          /*TODO - Getting Ready to convert to API
+            res.json({success: true, msg: 'User Logged in Successfully!', user: {
+                id: user._id,
+                displayName: user.displayName,
+                username: user.username,
+                email: user.email
+            }, token: authToken});
+            */
+        return res.redirect('/contact-list');
+    });
+    
+  })(req, res, next);
+}
+
 
 module.exports.displayRegisterPage = (req, res, next) => {
     // check if the user is not already logged in
@@ -156,7 +149,8 @@ module.exports.processRegisterPage = (req, res, next) => {
 
             /* TODO - Getting Ready to convert to API
             res.json({success: true, msg: 'User Registered Successfully!'});
-                        */
+            */
+                        
 
             return passport.authenticate('local')(req, res, () => {
                 res.redirect('/contact-list')

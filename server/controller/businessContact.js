@@ -3,7 +3,7 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 
-//let jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
 
 // create a reference to the model
 let Contact = require('../models/contact');
