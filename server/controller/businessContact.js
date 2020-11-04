@@ -24,7 +24,7 @@ module.exports.displayContactList = (req, res, next) => {
             ContactList: contactList, 
             displayName: req.user ? req.user.displayName : ''});           
         }
-    });
+    }).sort({"name":1});//sort the name alphabetically;
 }
 //Displaying the add page of contacts
 module.exports.displayAddPage = (req, res, next) => {
